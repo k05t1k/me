@@ -1,3 +1,6 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Shop.Context;
+
 namespace Shop
 {
     public class Program
@@ -9,13 +12,16 @@ namespace Shop
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            // Настройка контекста базы данных
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -26,6 +32,7 @@ namespace Shop
 
             app.UseAuthorization();
 
+            // Настройка маршрутов
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");

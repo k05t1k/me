@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Products";
+}
+
+<h1>Products</h1>
+
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4">
+                @if (!string.IsNullOrEmpty(product.ImageUrlProduct))
+                {
+                    <img src="img/@product.ImageUrlProduct" class="card-img-top" alt="@product.NameProduct" style="max-height: 200px; object-fit: cover;">
+                }
+                <div class="card-body">
+                    <h5 class="card-title">@product.NameProduct</h5>
+                    <p class="card-text">@product.DescriptionProduct</p>
+                    <p class="card-text"><strong>Price:</strong> @product.PriceProduct.ToString("C")</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+}
