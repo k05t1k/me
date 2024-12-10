@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\cutec\\Development\\source\\repos\\Shop\\Shop.csproj": {}
+    "D:\\Development\\source\\repos\\Shop\\Shop.csproj": {}
   },
   "projects": {
-    "C:\\Users\\cutec\\Development\\source\\repos\\Shop\\Shop.csproj": {
+    "D:\\Development\\source\\repos\\Shop\\Shop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\cutec\\Development\\source\\repos\\Shop\\Shop.csproj",
+        "projectUniqueName": "D:\\Development\\source\\repos\\Shop\\Shop.csproj",
         "projectName": "Shop",
-        "projectPath": "C:\\Users\\cutec\\Development\\source\\repos\\Shop\\Shop.csproj",
+        "projectPath": "D:\\Development\\source\\repos\\Shop\\Shop.csproj",
         "packagesPath": "C:\\Users\\cutec\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\cutec\\Development\\source\\repos\\Shop\\obj\\",
+        "outputPath": "D:\\Development\\source\\repos\\Shop\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -50,6 +50,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "BouncyCastle": {
+              "target": "Package",
+              "version": "[1.8.9, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[9.0.0, )"
@@ -61,6 +65,22 @@
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.Office.Interop.Word": {
+              "target": "Package",
+              "version": "[15.0.4797.1004, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "itext.bouncy-castle-adapter": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "itext7": {
               "target": "Package",
               "version": "[9.0.0, )"
             }
@@ -84,7 +104,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100-rc.2.24474.11/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

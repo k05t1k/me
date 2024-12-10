@@ -1,5 +1,9 @@
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\img\laptopABC.jpg
+wwwroot\img\podsmax.jpg
+wwwroot\img\ps5.jpg
+wwwroot\img\watch.png
 wwwroot\img\xyzphone.png
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css

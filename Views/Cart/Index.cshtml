@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Shop.Models.CartItem>
+
+@{
+    ViewBag.Title = "Cart";
+    decimal total = Model.Sum(item => item.Price * item.Quantity);
+}
+
+<h1>Your Cart</h1>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Product.NameProduct</h5>
+                    <p class="card-text">Quantity: @item.Quantity</p>
+                    <p class="card-text">Price: @item.Price.ToString("C")</p>
+                    <div class="d-flex justify-content-between">
+                        <form asp-action="BuyItem" asp-route-id="@item.IdCartItem" method="post" class="mr-2">
+                            <button type="submit" class="btn btn-primary">Buy Item</button>
+                        </form>
+                        <form asp-action="RemoveFromCart" asp-route-id="@item.IdCartItem" method="post">
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <h3>Total: @total.ToString("C")</h3>
+        <form asp-action="BuyAll" method="post">
+            <button type="submit" class="btn btn-success">Buy All</button>
+        </form>
+    </div>
+</div>

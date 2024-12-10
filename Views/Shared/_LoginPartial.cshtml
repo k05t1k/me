@@ -1,0 +1,55 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+<ul class="navbar-nav">
+    @if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+    {
+        var userName = HttpContextAccessor.HttpContext.User.Identity.Name;
+        var isManager = HttpContextAccessor.HttpContext.User.IsInRole("Manager");
+        var isAdmin = HttpContextAccessor.HttpContext.User.IsInRole("Admin");
+
+        if (isManager)
+        {
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="ManageProducts" asp-action="Index">ManageProducts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Cart" asp-action="Index">Cart</a>
+            </li>
+        }
+        else if (isAdmin)
+        {
+            @* TODO: Make export *@
+            @* <li class="nav-item"> *@
+            @*     <a class="nav-link" asp-area="" asp-controller="UserControl" asp-action="Index">User Control</a> *@
+            @* </li> *@
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="ManageProducts" asp-action="Index">ManageProducts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Cart" asp-action="Index">Cart</a>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Cart" asp-action="Index">Cart</a>
+            </li>            
+        }
+
+        <li class="nav-item">
+            <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
+                <button type="submit" class="nav-link btn btn-link">Logout (@userName)</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+        </li>
+    }
+</ul>

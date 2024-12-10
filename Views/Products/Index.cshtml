@@ -1,5 +1,10 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Http
+@using System.Security.Claims
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
     ViewBag.Title = "Products";
+    var isAuthenticated = HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated;
 }
 
 <h1>Products</h1>
@@ -16,13 +21,22 @@
                 <div class="card-body">
                     <h5 class="card-title">@product.NameProduct</h5>
                     <p class="card-text">@product.DescriptionProduct</p>
-                    <p class="card-text"><strong>Price:</strong> @product.PriceProduct.ToString("C")</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p class="card-text mb-0"><strong>Price:</strong> @product.PriceProduct.ToString("C")</p>
+                        @if (isAuthenticated)
+                        {
+                            <form asp-action="AddToCart" asp-controller="Cart" method="post" style="display:inline;">
+                                <input type="hidden" name="productId" value="@product.IdProduct" />
+                                <button type="submit" class="btn btn-primary">Add to cart</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Login", "Account")" class="btn btn-primary">Login to add to cart</a>
+                        }
+                    </div>
                 </div>
             </div>
         </div>
     }
 </div>
-
-@section Scripts {
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-}

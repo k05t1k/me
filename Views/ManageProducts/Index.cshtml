@@ -1,0 +1,86 @@
+﻿@using Newtonsoft.Json
+@{
+    ViewData["Title"] = "Manage Products";
+}
+
+<h1>Manage Products</h1>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div>
+    <h2>Total Sales</h2>
+    <canvas id="totalSalesChart" width="400" height="200"></canvas>
+</div>
+
+<div>
+    <h2>Product Sales Distribution</h2>
+    <canvas id="productSalesChart" width="400" height="200"></canvas>
+</div>
+
+<div class="mt-4">
+    <form asp-action="ExportToPdf" method="post">
+        <button type="submit" class="btn btn-primary">Export to PDF</button>
+    </form>    
+</div>
+
+<script>
+    var totalSalesData = {
+        labels: ['Total Sales'],
+        datasets: [{
+            label: 'Total Sales',
+            data: [@ViewBag.TotalQuantity],
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+        }]
+    };
+
+    var totalSalesConfig = {
+        type: 'bar',
+        data: totalSalesData,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    };
+
+    var totalSalesChart = new Chart(
+        document.getElementById('totalSalesChart'),
+        totalSalesConfig
+    );
+
+    var productSalesData = {
+        labels: @Html.Raw(JsonConvert.SerializeObject(ViewBag.ProductSales.Keys)),
+        datasets: [{
+            data: @Html.Raw(JsonConvert.SerializeObject(ViewBag.ProductSales.Values)),
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    var productSalesChart = new Chart(document.getElementById('productSalesChart'), {
+        type: 'pie',
+        data: productSalesData,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'top' },
+                title: { display: true, text: 'Product Sales Distribution' }
+            }
+        }
+    });
+</script>
